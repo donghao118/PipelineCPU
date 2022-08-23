@@ -1,0 +1,13 @@
+`define ALU_OP_ADD 5'b00001
+`define ALU_OP_SUB 5'b00010
+`define ALU_OP_SLT 5'b00011
+`define ALU_OP_AND 5'b00100
+`define ALU_OP_OR 5'b00101
+`define ALU_OP_XOR 5'b00110
+`define ALU_OP_NOR 5'b00111
+`define ALU_OP_SLL 5'b01000
+`define ALU_OP_SRL 5'b01001
+`define ALU_OP_SRA 5'b01010
+`define ALU_OP_DEFAULT 5'b00000
+
+

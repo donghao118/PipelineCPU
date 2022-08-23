@@ -84,7 +84,7 @@ module ControlUnit(
     assign reg_we = (inst_type_r || lui || addi || addiu || andi || sltiu || ori || xori || lw || func_sll) ? 1 : 0; 
     assign mem_we = (sw) ? 1 : 0;
 
-    assign overflow_check = (func_add || func_sub || addi) ? 1 : 0;
+    assign overflow_check = (func_add || func_sub || addi || func_sltu || sltiu) ? 1 : 0;
 
     assign ext_signal = (lui) ? 2'b01 : // shift left 16
                             (addiu || func_add || sltiu) ? 2'b10 : // signed extend
@@ -93,7 +93,7 @@ module ControlUnit(
     assign jump = (lui || addiu || func_add || lw || sw || func_sll || func_sub || func_slt || func_sltu || func_addu || 
                     func_and || func_nor || func_or || func_sra || func_srl || func_xor || func_subu || addi || sltiu || andi || 
                     ori || xori) ? 3'b001 :
-                    ((beq && !zero) || (bne && zero)) ? 3'b010 : ((beq && zero) || (bne && !zero)) ? 3'b011 : (j || jr) ? 3'b100 : 3'b000;
-                    // normal jump, next instruction \ beq, but not equal or bne, but equal \ beq, and equal or bne, and not equal \ unconditional jump
+                    ((beq && !zero) || (bne && zero)) ? 3'b010 : ((beq && zero) || (bne && !zero)) ? 3'b011 : (j) ? 3'b100 : (jr) ? 3'b101 : 3'b000;
+                    // normal jump, next instruction \ beq, but not equal or bne, but equal \ beq, and equal or bne, and not equal \ unconditional jump \ jump to rs
 endmodule
 
